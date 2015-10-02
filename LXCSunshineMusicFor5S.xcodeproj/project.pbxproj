@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A39D6F241BBE233800658B93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A39D6F231BBE233800658B93 /* main.m */; };
+		A39D6F271BBE233800658B93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A39D6F261BBE233800658B93 /* AppDelegate.m */; };
+		A39D6F2A1BBE233800658B93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39D6F291BBE233800658B93 /* ViewController.m */; };
+		A39D6F2D1BBE233900658B93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A39D6F2B1BBE233900658B93 /* Main.storyboard */; };
+		A39D6F2F1BBE233900658B93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A39D6F2E1BBE233900658B93 /* Assets.xcassets */; };
+		A39D6F321BBE233900658B93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A39D6F301BBE233900658B93 /* LaunchScreen.storyboard */; };
+		A39D6F3D1BBE233900658B93 /* LXCSunshineMusicFor5STests.m in Sources */ = {isa = PBXBuildFile; fileRef = A39D6F3C1BBE233900658B93 /* LXCSunshineMusicFor5STests.m */; };
+		A39D6F481BBE233900658B93 /* LXCSunshineMusicFor5SUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A39D6F471BBE233900658B93 /* LXCSunshineMusicFor5SUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A39D6F391BBE233900658B93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A39D6F171BBE233700658B93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A39D6F1E1BBE233800658B93;
+			remoteInfo = LXCSunshineMusicFor5S;
+		};
+		A39D6F441BBE233900658B93 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A39D6F171BBE233700658B93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A39D6F1E1BBE233800658B93;
+			remoteInfo = LXCSunshineMusicFor5S;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A39D6F1F1BBE233800658B93 /* LXCSunshineMusicFor5S.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXCSunshineMusicFor5S.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A39D6F231BBE233800658B93 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A39D6F251BBE233800658B93 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A39D6F261BBE233800658B93 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A39D6F281BBE233800658B93 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A39D6F291BBE233800658B93 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A39D6F2C1BBE233900658B93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A39D6F2E1BBE233900658B93 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A39D6F311BBE233900658B93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A39D6F331BBE233900658B93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A39D6F381BBE233900658B93 /* LXCSunshineMusicFor5STests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LXCSunshineMusicFor5STests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A39D6F3C1BBE233900658B93 /* LXCSunshineMusicFor5STests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCSunshineMusicFor5STests.m; sourceTree = "<group>"; };
+		A39D6F3E1BBE233900658B93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A39D6F431BBE233900658B93 /* LXCSunshineMusicFor5SUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LXCSunshineMusicFor5SUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A39D6F471BBE233900658B93 /* LXCSunshineMusicFor5SUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LXCSunshineMusicFor5SUITests.m; sourceTree = "<group>"; };
+		A39D6F491BBE233900658B93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A39D6F1C1BBE233800658B93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F351BBE233900658B93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F401BBE233900658B93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A39D6F161BBE233700658B93 = {
+			isa = PBXGroup;
+			children = (
+				A39D6F211BBE233800658B93 /* LXCSunshineMusicFor5S */,
+				A39D6F3B1BBE233900658B93 /* LXCSunshineMusicFor5STests */,
+				A39D6F461BBE233900658B93 /* LXCSunshineMusicFor5SUITests */,
+				A39D6F201BBE233800658B93 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A39D6F201BBE233800658B93 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A39D6F1F1BBE233800658B93 /* LXCSunshineMusicFor5S.app */,
+				A39D6F381BBE233900658B93 /* LXCSunshineMusicFor5STests.xctest */,
+				A39D6F431BBE233900658B93 /* LXCSunshineMusicFor5SUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A39D6F211BBE233800658B93 /* LXCSunshineMusicFor5S */ = {
+			isa = PBXGroup;
+			children = (
+				A39D6F251BBE233800658B93 /* AppDelegate.h */,
+				A39D6F261BBE233800658B93 /* AppDelegate.m */,
+				A39D6F281BBE233800658B93 /* ViewController.h */,
+				A39D6F291BBE233800658B93 /* ViewController.m */,
+				A39D6F2B1BBE233900658B93 /* Main.storyboard */,
+				A39D6F2E1BBE233900658B93 /* Assets.xcassets */,
+				A39D6F301BBE233900658B93 /* LaunchScreen.storyboard */,
+				A39D6F331BBE233900658B93 /* Info.plist */,
+				A39D6F221BBE233800658B93 /* Supporting Files */,
+			);
+			path = LXCSunshineMusicFor5S;
+			sourceTree = "<group>";
+		};
+		A39D6F221BBE233800658B93 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A39D6F231BBE233800658B93 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A39D6F3B1BBE233900658B93 /* LXCSunshineMusicFor5STests */ = {
+			isa = PBXGroup;
+			children = (
+				A39D6F3C1BBE233900658B93 /* LXCSunshineMusicFor5STests.m */,
+				A39D6F3E1BBE233900658B93 /* Info.plist */,
+			);
+			path = LXCSunshineMusicFor5STests;
+			sourceTree = "<group>";
+		};
+		A39D6F461BBE233900658B93 /* LXCSunshineMusicFor5SUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A39D6F471BBE233900658B93 /* LXCSunshineMusicFor5SUITests.m */,
+				A39D6F491BBE233900658B93 /* Info.plist */,
+			);
+			path = LXCSunshineMusicFor5SUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A39D6F1E1BBE233800658B93 /* LXCSunshineMusicFor5S */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A39D6F4C1BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5S" */;
+			buildPhases = (
+				A39D6F1B1BBE233800658B93 /* Sources */,
+				A39D6F1C1BBE233800658B93 /* Frameworks */,
+				A39D6F1D1BBE233800658B93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LXCSunshineMusicFor5S;
+			productName = LXCSunshineMusicFor5S;
+			productReference = A39D6F1F1BBE233800658B93 /* LXCSunshineMusicFor5S.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A39D6F371BBE233900658B93 /* LXCSunshineMusicFor5STests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A39D6F4F1BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5STests" */;
+			buildPhases = (
+				A39D6F341BBE233900658B93 /* Sources */,
+				A39D6F351BBE233900658B93 /* Frameworks */,
+				A39D6F361BBE233900658B93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A39D6F3A1BBE233900658B93 /* PBXTargetDependency */,
+			);
+			name = LXCSunshineMusicFor5STests;
+			productName = LXCSunshineMusicFor5STests;
+			productReference = A39D6F381BBE233900658B93 /* LXCSunshineMusicFor5STests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A39D6F421BBE233900658B93 /* LXCSunshineMusicFor5SUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A39D6F521BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5SUITests" */;
+			buildPhases = (
+				A39D6F3F1BBE233900658B93 /* Sources */,
+				A39D6F401BBE233900658B93 /* Frameworks */,
+				A39D6F411BBE233900658B93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A39D6F451BBE233900658B93 /* PBXTargetDependency */,
+			);
+			name = LXCSunshineMusicFor5SUITests;
+			productName = LXCSunshineMusicFor5SUITests;
+			productReference = A39D6F431BBE233900658B93 /* LXCSunshineMusicFor5SUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A39D6F171BBE233700658B93 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = blackmatch;
+				TargetAttributes = {
+					A39D6F1E1BBE233800658B93 = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = M8JY4LPBCH;
+					};
+					A39D6F371BBE233900658B93 = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = M8JY4LPBCH;
+						TestTargetID = A39D6F1E1BBE233800658B93;
+					};
+					A39D6F421BBE233900658B93 = {
+						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = M8JY4LPBCH;
+						TestTargetID = A39D6F1E1BBE233800658B93;
+					};
+				};
+			};
+			buildConfigurationList = A39D6F1A1BBE233800658B93 /* Build configuration list for PBXProject "LXCSunshineMusicFor5S" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A39D6F161BBE233700658B93;
+			productRefGroup = A39D6F201BBE233800658B93 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A39D6F1E1BBE233800658B93 /* LXCSunshineMusicFor5S */,
+				A39D6F371BBE233900658B93 /* LXCSunshineMusicFor5STests */,
+				A39D6F421BBE233900658B93 /* LXCSunshineMusicFor5SUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A39D6F1D1BBE233800658B93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A39D6F321BBE233900658B93 /* LaunchScreen.storyboard in Resources */,
+				A39D6F2F1BBE233900658B93 /* Assets.xcassets in Resources */,
+				A39D6F2D1BBE233900658B93 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F361BBE233900658B93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F411BBE233900658B93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A39D6F1B1BBE233800658B93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A39D6F2A1BBE233800658B93 /* ViewController.m in Sources */,
+				A39D6F271BBE233800658B93 /* AppDelegate.m in Sources */,
+				A39D6F241BBE233800658B93 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F341BBE233900658B93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A39D6F3D1BBE233900658B93 /* LXCSunshineMusicFor5STests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A39D6F3F1BBE233900658B93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A39D6F481BBE233900658B93 /* LXCSunshineMusicFor5SUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A39D6F3A1BBE233900658B93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A39D6F1E1BBE233800658B93 /* LXCSunshineMusicFor5S */;
+			targetProxy = A39D6F391BBE233900658B93 /* PBXContainerItemProxy */;
+		};
+		A39D6F451BBE233900658B93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A39D6F1E1BBE233800658B93 /* LXCSunshineMusicFor5S */;
+			targetProxy = A39D6F441BBE233900658B93 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A39D6F2B1BBE233900658B93 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A39D6F2C1BBE233900658B93 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A39D6F301BBE233900658B93 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A39D6F311BBE233900658B93 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A39D6F4A1BBE233900658B93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A39D6F4B1BBE233900658B93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A39D6F4D1BBE233900658B93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LXCSunshineMusicFor5S/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5S;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A39D6F4E1BBE233900658B93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LXCSunshineMusicFor5S/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5S;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A39D6F501BBE233900658B93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LXCSunshineMusicFor5STests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5STests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LXCSunshineMusicFor5S.app/LXCSunshineMusicFor5S";
+			};
+			name = Debug;
+		};
+		A39D6F511BBE233900658B93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = LXCSunshineMusicFor5STests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5STests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LXCSunshineMusicFor5S.app/LXCSunshineMusicFor5S";
+			};
+			name = Release;
+		};
+		A39D6F531BBE233900658B93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LXCSunshineMusicFor5SUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5SUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LXCSunshineMusicFor5S;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A39D6F541BBE233900658B93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = LXCSunshineMusicFor5SUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blackmatch.www.LXCSunshineMusicFor5SUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LXCSunshineMusicFor5S;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A39D6F1A1BBE233800658B93 /* Build configuration list for PBXProject "LXCSunshineMusicFor5S" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A39D6F4A1BBE233900658B93 /* Debug */,
+				A39D6F4B1BBE233900658B93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A39D6F4C1BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5S" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A39D6F4D1BBE233900658B93 /* Debug */,
+				A39D6F4E1BBE233900658B93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A39D6F4F1BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5STests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A39D6F501BBE233900658B93 /* Debug */,
+				A39D6F511BBE233900658B93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A39D6F521BBE233900658B93 /* Build configuration list for PBXNativeTarget "LXCSunshineMusicFor5SUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A39D6F531BBE233900658B93 /* Debug */,
+				A39D6F541BBE233900658B93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A39D6F171BBE233700658B93 /* Project object */;
+}
