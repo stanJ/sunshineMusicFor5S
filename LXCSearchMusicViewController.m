@@ -59,19 +59,33 @@
     [self.musicLinks removeAllObjects];
     [self.lyricLinks removeAllObjects];
     
-    LXCSearchMusicFromInternet *searchMusicFromInternet = [LXCSearchMusicFromInternet searchMusicFromInternetWithSongName:self.inputSongNameTextField.text andSingerName:self.inputSingerNameTextField.text];
+    NSOperationQueue * q = [[NSOperationQueue alloc]init];
     
-    [NSThread sleepForTimeInterval:2.0];
-    
-    self.musicLinks = searchMusicFromInternet.musicLinks;
-    self.lyricLinks = searchMusicFromInternet.lyricLinks;
-    
-    if (self.searchMusicTableView.hidden) {
+    [q addOperationWithBlock:^{
+        NSLog(@"耗时操作...%@",[NSThread currentThread]);
         
-        self.searchMusicTableView.hidden = NO;
-    }
+        LXCSearchMusicFromInternet *searchMusicFromInternet = [LXCSearchMusicFromInternet searchMusicFromInternetWithSongName:self.inputSongNameTextField.text andSingerName:self.inputSingerNameTextField.text];
+        
+        [NSThread sleepForTimeInterval:2.0];
+        
+        self.musicLinks = searchMusicFromInternet.musicLinks;
+        self.lyricLinks = searchMusicFromInternet.lyricLinks;
+        
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            NSLog(@"更新UI...%@",[NSThread currentThread]);
+            
+            if (self.searchMusicTableView.hidden) {
+                
+                self.searchMusicTableView.hidden = NO;
+            }
+            
+            
+            [self.searchMusicTableView reloadData];
+        }];
+
+        
+    }];
     
-    [self.searchMusicTableView reloadData];
 }
 
 #pragma mark UITableViewDelegate
@@ -119,7 +133,18 @@
     NSArray *lyricLinkSubStrings = [lyricLink componentsSeparatedByString:@"/"];
     
     musicPlayerViewController.songName = self.inputSongNameTextField.text;
-    [musicPlayerViewController playMusicWithURL:[NSURL URLWithString:musicLink] andLyricFileName:[lyricLinkSubStrings lastObject]];
+    
+    NSOperationQueue *opQueue = [[NSOperationQueue alloc]init];
+    NSBlockOperation *blockOp = [NSBlockOperation blockOperationWithBlock:^{
+        
+        [musicPlayerViewController playMusicWithURL:[NSURL URLWithString:musicLink] andLyricFileName:[lyricLinkSubStrings lastObject]];
+        
+    }];
+    
+    [opQueue addOperation:blockOp];
+    
+//    [musicPlayerViewController playMusicWithURL:[NSURL URLWithString:musicLink] andLyricFileName:[lyricLinkSubStrings lastObject]];
+    
     self.tabBarController.selectedIndex = 2;
 }
 

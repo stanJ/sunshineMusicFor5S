@@ -407,7 +407,7 @@ public:
             continue;
         }
         totalCacheSize -= [cachedMetaData fileSize];
-                
+        
         if (![[NSFileManager defaultManager] removeItemAtPath:cacheObj.path error:nil]) {
             continue;
         }
@@ -429,6 +429,8 @@ public:
         }
     }
 #endif
+    
+    
 }
 
 - (AudioStreamStateObserver *)streamStateObserver

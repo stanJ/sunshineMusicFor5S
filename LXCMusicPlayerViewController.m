@@ -81,43 +81,61 @@
     LXCNavigationBarTitleView *navigatiionBarTitleView = (LXCNavigationBarTitleView *)self.tabBarController.navigationItem.titleView;
     [navigatiionBarTitleView setTitle:self.songName];
     
-    LXCMusicPlayer *musicPlayer = [LXCMusicPlayer musicPlayer];
-    self.audioStream = musicPlayer.audioStream;
-    
-    if (self.audioStream.isPlaying) {
+    [[NSOperationQueue mainQueue]addOperationWithBlock:^{
         
-        [self.audioStream stop];
-    }
-    
-    self.audioStream = [[FSAudioStream alloc]initWithUrl:url];
-    self.audioStream.onFailure =^(FSAudioStreamError error,NSString *description)
-    {
-        NSLog(@"播放过程中发生错误，错误信息：%@",description);
-    };
-    
-    self.audioStream.onCompletion=^()
-    {
-        NSLog(@"播放完成!");
-    };
-    
-    [self.audioStream play];
-    
-    self.lyricFileName = lyricFileName;
-    
-    if ([self parseLyric]) {
+        LXCMusicPlayer *musicPlayer = [LXCMusicPlayer musicPlayer];
+        self.audioStream = musicPlayer.audioStream;
         
-        self.findLyric = YES;
-        self.lyricTableView.hidden = NO;
-        self.noLyricLabel.hidden = YES;
-        [self.lyricTableView reloadData];
+        if (self.audioStream.isPlaying) {
+            
+            [self.audioStream stop];
+        }
+
+        self.audioStream = [[FSAudioStream alloc]initWithUrl:url];
+        self.audioStream.onFailure =^(FSAudioStreamError error,NSString *description)
+        {
+            NSLog(@"播放过程中发生错误，错误信息：%@",description);
+        };
         
-    } else{
+        self.audioStream.onCompletion=^()
+        {
+            NSLog(@"播放完成!");
+        };
         
-        self.lyricTableView.hidden = YES;
-        self.noLyricLabel.hidden = NO;
-    }
+        [self.audioStream play];
+        
+        
+        self.lyricFileName = lyricFileName;
+        
+        if ([self parseLyric]) {
+            
+            self.findLyric = YES;
+            self.lyricTableView.hidden = NO;
+            self.noLyricLabel.hidden = YES;
+            [self.lyricTableView reloadData];
+            
+        } else{
+            
+            self.lyricTableView.hidden = YES;
+            self.noLyricLabel.hidden = NO;
+        }
+        
+    }];
     
     self.updateUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
+
+//    self.audioStream = [[FSAudioStream alloc]initWithUrl:url];
+//    self.audioStream.onFailure =^(FSAudioStreamError error,NSString *description)
+//    {
+//        NSLog(@"播放过程中发生错误，错误信息：%@",description);
+//    };
+//    
+//    self.audioStream.onCompletion=^()
+//    {
+//        NSLog(@"播放完成!");
+//    };
+//    
+//    [self.audioStream play];
 }
 
 - (void)updateUI{
