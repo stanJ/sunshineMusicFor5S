@@ -11,6 +11,7 @@
 @interface LXCMusicPlayerViewController : UIViewController
 
 @property (copy, nonatomic) NSString *songName;
+@property (assign, nonatomic)NSInteger playingMusicIndex;
 
 - (void)playMusicWithURL:(NSURL *)url andLyricFileName:(NSString *)lyricFileName;
 

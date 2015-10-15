@@ -27,6 +27,11 @@
     [self createMoodDirectory];
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
 - (NSString *)getMoodFileName{
     
     NSDate *nowDate = [NSDate date];
@@ -44,21 +49,48 @@
 
 - (IBAction)saveEdit:(UIButton *)sender {
     
-    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
-    NSString *moodFilePath = [NSString stringWithFormat:@"%@/moodFiles/%@", sandBoxPath, [self getMoodFileName]];
+    BOOL nothing = YES;
     
-    NSString *moodString = [NSString stringWithFormat:@"%@&&%@", self.inputTitleTextField.text, self.inputMoodContentTextView.text];
-    
-    if ([moodString writeToFile:moodFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
+    //判断输入的歌名是否为空
+    for (NSInteger i = 0; i < self.inputMoodContentTextView.text.length; i++)
+    {
+        char ch = [self.inputMoodContentTextView.text characterAtIndex:i];
         
-        NSLog(@"心情写入文件成功");
-        
-    } else {
-        
-        NSLog(@"心情写入文件失败");
+        if (ch != ' ')
+        {
+            nothing = NO;
+            break;
+        }
     }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.inputMoodContentTextView.text.length == 0 || nothing){
+        
+        UIAlertController *deleteAlertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"心情内容不能为空" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"我知道啦" style:UIAlertActionStyleDefault handler:nil];
+        
+        [deleteAlertController addAction:cancelAction];
+        
+        [self presentViewController:deleteAlertController animated:YES completion:nil];
+    }
+    else {
+        
+        NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+        NSString *moodFilePath = [NSString stringWithFormat:@"%@/moodFiles/%@", sandBoxPath, [self getMoodFileName]];
+        
+        
+        NSString *moodString = [NSString stringWithFormat:@"%@&&%@", self.inputTitleTextField.text, self.inputMoodContentTextView.text];
+        
+        if ([moodString writeToFile:moodFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil]) {
+            
+            NSLog(@"心情写入文件成功");
+            
+        } else {
+            
+            NSLog(@"心情写入文件失败");
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)createMoodDirectory{

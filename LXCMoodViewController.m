@@ -64,27 +64,38 @@
     }
 }
 
-- (BOOL)deleteMoodWithFileName:(NSString *)fileName{
+- (void)deleteMoodWithFileName:(NSString *)fileName{
     
-    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    NSOperationQueue * q = [[NSOperationQueue alloc]init];
     
-    NSString *moodFilePath = [NSString stringWithFormat:@"%@/moodFiles/%@", sandBoxPath, fileName];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ([fileManager removeItemAtPath:moodFilePath error:nil]) {
+    [q addOperationWithBlock:^{
         
-        return YES;
+        NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
         
-    } else {
+        NSString *moodFilePath = [NSString stringWithFormat:@"%@/moodFiles/%@", sandBoxPath, fileName];
         
-        return NO;
-    }
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if ([fileManager removeItemAtPath:moodFilePath error:nil]) {
+            
+            NSLog(@"删除成功！");
+            
+        } else {
+            
+            NSLog(@"删除失败！");
+        }
+        
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            
+            [self initMoodData];
+            [self.moodTableView reloadData];
+        }];
+        
+    }];
+
 }
 
 - (IBAction)deleteMood:(UILongPressGestureRecognizer *)sender {
-    
-    NSLog(@"删除心情");
     
     CGPoint pressPoint = [sender locationInView:self.moodTableView];
     NSIndexPath *selectedIndexPath = [self.moodTableView indexPathForRowAtPoint:pressPoint];
@@ -99,17 +110,7 @@
             
             NSString *deleteFileName = [self.moodFileNames objectAtIndex:selectedIndexPath.row];
             
-            if ([self deleteMoodWithFileName:deleteFileName]) {
-                
-                NSLog(@"删除成功");
-                
-            } else {
-                
-                NSLog(@"删除失败");
-            }
-            
-            [self initMoodData];
-            [self.moodTableView reloadData];
+            [self deleteMoodWithFileName:deleteFileName];
         }];
         
         [deleteAlertController addAction:cancelAction];
@@ -191,6 +192,7 @@
         LXCShowMoodViewController *showMoodViewControll = [storyboard instantiateViewControllerWithIdentifier:@"showMoodViewController"];
         showMoodViewControll.moodTitle = moodTitle;
         showMoodViewControll.moodContent = moodcontentString;
+        showMoodViewControll.moodFileName = fileName;
         
         [self.navigationController pushViewController:showMoodViewControll animated:YES];
     }

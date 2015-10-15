@@ -115,31 +115,52 @@
     NSString *songName = [[[self.musicFileNames objectAtIndex:indexPath.row]componentsSeparatedByString:@"-"]firstObject];
     LXCMusicPlayerViewController *musicPlayerViewController = [self.tabBarController.viewControllers objectAtIndex:2];
     musicPlayerViewController.songName = songName;
-    [musicPlayerViewController playMusicWithURL:musicUrl andLyricFileName:newLyricFileName];
+    musicPlayerViewController.playingMusicIndex = indexPath.row;
+    
+    NSOperationQueue *opQueue = [[NSOperationQueue alloc]init];
+    NSBlockOperation *blockOp = [NSBlockOperation blockOperationWithBlock:^{
+        
+        [musicPlayerViewController playMusicWithURL:musicUrl andLyricFileName:newLyricFileName];
+        
+    }];
+    
+    [opQueue addOperation:blockOp];
+    
     self.tabBarController.selectedIndex = 2;
 }
 
-- (BOOL)deleteMusicWithFileName:(NSString *)fileName{
+- (void)deleteMusicWithFileName:(NSString *)fileName{
     
-    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    NSOperationQueue * q = [[NSOperationQueue alloc]init];
     
-    NSString *moodFilePath = [NSString stringWithFormat:@"%@/musicFiles/%@", sandBoxPath, fileName];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if ([fileManager removeItemAtPath:moodFilePath error:nil]) {
+    [q addOperationWithBlock:^{
         
-        return YES;
+        NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
         
-    } else {
+        NSString *moodFilePath = [NSString stringWithFormat:@"%@/musicFiles/%@", sandBoxPath, fileName];
         
-        return NO;
-    }
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        if ([fileManager removeItemAtPath:moodFilePath error:nil]) {
+            
+            NSLog(@"删除成功");
+            
+        } else {
+            
+            NSLog(@"删除成功");
+        }
+
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            
+            [self initMusicData];
+            [self.localMusicTableView reloadData];
+        }];
+        
+    }];
+
 }
 
 - (IBAction)deleteMusic:(UILongPressGestureRecognizer *)sender {
-    
-    NSLog(@"删除音乐");
     
     CGPoint pressPoint = [sender locationInView:self.localMusicTableView];
     NSIndexPath *selectedIndexPath = [self.localMusicTableView indexPathForRowAtPoint:pressPoint];
@@ -154,17 +175,8 @@
             
             NSString *deleteFileName = [self.musicFileNames objectAtIndex:selectedIndexPath.row];
             
-            if ([self deleteMusicWithFileName:deleteFileName]) {
-                
-                NSLog(@"删除成功");
-                
-            } else {
-                
-                NSLog(@"删除失败");
-            }
+            [self deleteMusicWithFileName:deleteFileName];
             
-            [self initMusicData];
-            [self.localMusicTableView reloadData];
         }];
         
         [deleteAlertController addAction:cancelAction];

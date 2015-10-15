@@ -1331,6 +1331,10 @@ public:
 {
     NSAssert([NSThread isMainThread], @"FSAudioStream.play needs to be called in the main thread");
     
+//    [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error:nil];
+//    
+//    [[AVAudioSession sharedInstance] setActive: YES error: nil];
+    
     [_private play];   
 }
 

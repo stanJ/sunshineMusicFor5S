@@ -170,12 +170,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9HV-V9-VSJ">
+                                <rect key="frame" x="20" y="447" width="49" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.35608296895642977" green="1" blue="0.60136200405019991" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="编辑">
+                                    <color key="titleColor" red="1" green="0.27166684449289913" blue="0.3133657090721832" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="editEnabled:" destination="j25-6B-yrP" eventType="touchUpInside" id="aVi-Eu-rlJ"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7l-oI-6Go">
+                                <rect key="frame" x="251" y="447" width="49" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.35608296900000003" green="1" blue="0.60136200409999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="保存">
+                                    <color key="titleColor" red="1" green="0.2716668445" blue="0.3133657091" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveChange:" destination="j25-6B-yrP" eventType="touchUpInside" id="giA-57-wLy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="moodContentTextView" destination="03R-KS-vi8" id="MLX-U8-XRu"/>
+                        <outlet property="saveButton" destination="p7l-oI-6Go" id="flH-Pi-T76"/>
                         <outlet property="titleTextField" destination="cwX-vF-cvx" id="RKk-L0-dfY"/>
                     </connections>
                 </viewController>
@@ -376,6 +399,9 @@
                                 <rect key="frame" x="91" y="475" width="36" height="36"/>
                                 <animations/>
                                 <state key="normal" image="btn_playing_pre_normal.png"/>
+                                <connections>
+                                    <action selector="playPreSong:" destination="HTF-NU-lht" eventType="touchUpInside" id="9j8-Rt-kCs"/>
+                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mPF-m5-Xpw">
                                 <rect key="frame" x="9" y="445" width="299" height="31"/>
@@ -388,7 +414,7 @@
                                 <rect key="frame" x="256" y="464" width="58" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="抱歉！无法找到歌词！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNK-jO-krb">
@@ -411,6 +437,9 @@
                                 <rect key="frame" x="189" y="475" width="36" height="36"/>
                                 <animations/>
                                 <state key="normal" title="下一首" image="btn_playing_next_normal.png"/>
+                                <connections>
+                                    <action selector="playNextSong:" destination="HTF-NU-lht" eventType="touchUpInside" id="gcu-Cw-3XM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -422,6 +451,7 @@
                         <outlet property="coverImageView" destination="ddd-M6-kk8" id="fVi-E0-GcZ"/>
                         <outlet property="lyricTableView" destination="rfZ-4I-7RU" id="sra-Bf-Zm2"/>
                         <outlet property="noLyricLabel" destination="UNK-jO-krb" id="bOo-q3-Fwm"/>
+                        <outlet property="palyPauseButton" destination="1np-0h-hck" id="fDg-LS-65x"/>
                         <outlet property="playProgressSlider" destination="mPF-m5-Xpw" id="j8Q-QB-czh"/>
                         <outlet property="playTimeInfoLabel" destination="LUv-fj-sUF" id="Nq1-XX-8aW"/>
                     </connections>
@@ -437,7 +467,7 @@
                     <navigationItem key="navigationItem" id="LiZ-iT-bMI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="T6O-Rh-CJ2">
                             <connections>
-                                <segue destination="c1t-Uq-vuh" kind="push" id="XD4-9J-jiG"/>
+                                <action selector="addNewMood:" destination="c0t-X6-Tr4" id="nGu-UZ-xce"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

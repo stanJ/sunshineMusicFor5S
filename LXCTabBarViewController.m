@@ -7,6 +7,7 @@
 //
 
 #import "LXCTabBarViewController.h"
+#import "LXCAddMoodViewController.h"
 
 @interface LXCTabBarViewController ()
 
@@ -17,6 +18,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+- (IBAction)addNewMood:(UIBarButtonItem *)sender {
+    
+    NSOperationQueue * q = [[NSOperationQueue alloc]init];
+    
+    [q addOperationWithBlock:^{
+        NSLog(@"耗时操作...%@",[NSThread currentThread]);
+        
+        //获取storyboard: 通过bundle根据storyboard的名字来获取我们的storyboard,
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        //由storyboard根据myView的storyBoardID来获取我们要切换的视图
+        LXCAddMoodViewController *addMoodViewControll = [storyboard instantiateViewControllerWithIdentifier:@"addMoodViewController"];
+        
+        [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+            NSLog(@"更新UI...%@",[NSThread currentThread]);
+            
+            [self.navigationController pushViewController:addMoodViewControll animated:YES];
+            
+        }];
+        
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {

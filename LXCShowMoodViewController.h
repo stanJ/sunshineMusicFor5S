@@ -12,5 +12,6 @@
 
 @property (copy, nonatomic)NSString *moodTitle;
 @property (copy, nonatomic)NSString *moodContent;
+@property (copy, nonatomic)NSString *moodFileName;
 
 @end

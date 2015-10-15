@@ -18,18 +18,32 @@
 @property (weak, nonatomic) IBOutlet UILabel *playTimeInfoLabel;
 @property (weak, nonatomic) IBOutlet UITableView *lyricTableView;
 @property (weak, nonatomic) IBOutlet UILabel *noLyricLabel;
+@property (weak, nonatomic) IBOutlet UIButton *palyPauseButton;
 
 @property (copy, nonatomic) NSString *lyricFileName;
 @property (strong, nonatomic) NSMutableDictionary *lyricContentDictionary;
 @property (strong, nonatomic) NSMutableArray *lyricTimeForRows;
 @property (strong, nonatomic) NSTimer *updateUITimer;
 @property (strong, nonatomic) FSAudioStream *audioStream;
-@property (assign, nonatomic) BOOL findLyric;
 @property (assign, nonatomic) NSInteger currentLyricRowIndex;
+@property (assign, nonatomic) BOOL findLyric;
+@property (strong, nonatomic)NSArray *musicFileNames;
+
 
 @end
 
 @implementation LXCMusicPlayerViewController
+
+//懒加载
+- (NSArray *)musicFileNames{
+    
+    if (!_musicFileNames) {
+        
+        _musicFileNames = [NSArray array];
+    }
+    
+    return _musicFileNames;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,6 +51,31 @@
     self.songName = @"用心聆听每一句歌词";
     
     self.findLyric = NO;
+    self.playingMusicIndex = -1;
+    self.updateUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
+}
+
+- (void)initMusicFile{
+    
+    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    
+    NSString *musicFilePath = [NSString stringWithFormat:@"%@/musicFiles", sandBoxPath];
+    
+    NSFileManager *fileManage = [NSFileManager defaultManager];
+    
+    self.musicFileNames = [fileManage contentsOfDirectoryAtPath:musicFilePath error:nil];
+    
+    if (self.musicFileNames.count > 0) {
+        
+        for (NSString *fileName in self.musicFileNames) {
+            
+            NSLog(@"%@", fileName);
+        }
+    } else {
+        
+        NSLog(@"没有本地音乐");
+    }
+
 }
 
 - (IBAction)playPauseControl:(UIButton *)sender {
@@ -45,23 +84,104 @@
     
     if (sender.selected) {
         
-        if (!self.audioStream.isPlaying) {
-            
-            [self.audioStream play];
-        }
+//        if (!self.audioStream.isPlaying) {
+//            
+//            [self.audioStream play];
+//        }
+        
+        [self.audioStream play];
         
         [sender setImage:[UIImage imageNamed:@"btn_playing_pause_normal.png"] forState:UIControlStateNormal];
         
     } else {
         
-        if (self.audioStream.isPlaying) {
-            
-            [self.audioStream pause];
-        }
+//        if (self.audioStream.isPlaying) {
+//            
+//            [self.audioStream pause];
+//        }
+        
+        [self.audioStream pause];
         
         [sender setImage:[UIImage imageNamed:@"btn_playing_play_normal.png"] forState:UIControlStateNormal];
     }
 }
+
+- (void)playMusicWithIndex:(NSInteger)index{
+    
+    NSString *sandBoxPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)lastObject];
+    
+    NSString *musicFilePath = [NSString stringWithFormat:@"%@/musicFiles/%@", sandBoxPath,[self.musicFileNames objectAtIndex:index]];
+    
+    NSURL *musicUrl = [NSURL fileURLWithPath:musicFilePath];
+    NSString *lyricFileName = [[[self.musicFileNames objectAtIndex:index]componentsSeparatedByString:@"-"]lastObject];
+    
+    NSArray *lyricFileNameSubArray = [lyricFileName componentsSeparatedByString:@"."];
+    NSString *newLyricFileName = [NSString stringWithFormat:@"%@.lrc", [lyricFileNameSubArray objectAtIndex:0]];
+    
+    self.songName = [[[self.musicFileNames objectAtIndex:index]componentsSeparatedByString:@"-"]firstObject];
+    
+    NSOperationQueue *opQueue = [[NSOperationQueue alloc]init];
+    NSBlockOperation *blockOp = [NSBlockOperation blockOperationWithBlock:^{
+        
+        [self playMusicWithURL:musicUrl andLyricFileName:newLyricFileName];
+        
+    }];
+    
+    [opQueue addOperation:blockOp];
+}
+
+- (IBAction)playPreSong:(UIButton *)sender {
+    
+    [self initMusicFile];
+    
+    if (self.musicFileNames.count > 0) {
+        
+        if (self.playingMusicIndex < 0) {
+            
+            self.playingMusicIndex = 0;
+
+        } else {
+            
+            if (self.playingMusicIndex - 1 >= 0) {
+                
+                self.playingMusicIndex -= 1;
+                
+            } else {
+                
+                self.playingMusicIndex = self.musicFileNames.count - 1;
+            }
+        }
+        
+        [self playMusicWithIndex:self.playingMusicIndex];
+    }
+}
+
+- (IBAction)playNextSong:(UIButton *)sender {
+    
+    [self initMusicFile];
+    
+    if (self.musicFileNames.count > 0) {
+        
+        if (self.playingMusicIndex < 0) {
+            
+            self.playingMusicIndex = 0;
+            
+        } else {
+            
+            if (self.playingMusicIndex + 1 < self.musicFileNames.count) {
+                
+                self.playingMusicIndex += 1;
+                
+            } else {
+                
+                self.playingMusicIndex =  0;
+            }
+        }
+        
+        [self playMusicWithIndex:self.playingMusicIndex];
+    }
+}
+
 
 - (IBAction)dragPlaySlider:(UISlider *)sender {
     
@@ -78,10 +198,14 @@
 
 - (void)playMusicWithURL:(NSURL *)url andLyricFileName:(NSString *)lyricFileName{
     
-    LXCNavigationBarTitleView *navigatiionBarTitleView = (LXCNavigationBarTitleView *)self.tabBarController.navigationItem.titleView;
-    [navigatiionBarTitleView setTitle:self.songName];
+    self.currentLyricRowIndex = 0;
+    
+    self.findLyric = NO;
     
     [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+        
+        LXCNavigationBarTitleView *navigatiionBarTitleView = (LXCNavigationBarTitleView *)self.tabBarController.navigationItem.titleView;
+        [navigatiionBarTitleView setTitle:self.songName];
         
         LXCMusicPlayer *musicPlayer = [LXCMusicPlayer musicPlayer];
         self.audioStream = musicPlayer.audioStream;
@@ -107,39 +231,42 @@
         
         self.lyricFileName = lyricFileName;
         
-        if ([self parseLyric]) {
-            
-            self.findLyric = YES;
-            self.lyricTableView.hidden = NO;
-            self.noLyricLabel.hidden = YES;
-            [self.lyricTableView reloadData];
-            
-        } else{
-            
-            self.lyricTableView.hidden = YES;
-            self.noLyricLabel.hidden = NO;
-        }
+        self.lyricTableView.hidden = YES;
+        self.noLyricLabel.hidden = NO;
+        
+//        if ([self parseLyric]) {
+//            
+//            self.findLyric = YES;
+//            self.lyricTableView.hidden = NO;
+//            self.noLyricLabel.hidden = YES;
+//            [self.lyricTableView reloadData];
+//            
+//        } else{
+//            
+//            self.lyricTableView.hidden = YES;
+//            self.noLyricLabel.hidden = NO;
+//        }
         
     }];
     
-    self.updateUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
-
-//    self.audioStream = [[FSAudioStream alloc]initWithUrl:url];
-//    self.audioStream.onFailure =^(FSAudioStreamError error,NSString *description)
-//    {
-//        NSLog(@"播放过程中发生错误，错误信息：%@",description);
-//    };
-//    
-//    self.audioStream.onCompletion=^()
-//    {
-//        NSLog(@"播放完成!");
-//    };
-//    
-//    [self.audioStream play];
+//    self.updateUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
 }
 
 - (void)updateUI{
     
+    
+    //LXCMusicPlayer *musicPlayer = [LXCMusicPlayer musicPlayer];
+    //self.audioStream = musicPlayer.audioStream;
+    
+    if (self.audioStream.isPlaying) {
+        
+        [self.palyPauseButton setImage:[UIImage imageNamed:@"btn_playing_pause_normal.png"] forState:UIControlStateNormal];
+        
+    } else {
+        
+        [self.palyPauseButton setImage:[UIImage imageNamed:@"btn_playing_play_normal.png"] forState:UIControlStateNormal];
+    }
+
     FSStreamPosition cur = self.audioStream.currentTimePlayed;
     FSStreamPosition end = self.audioStream.duration;
     
@@ -158,38 +285,43 @@
         }
     }
     
-    for (NSInteger i = 0; i < self.lyricTimeForRows.count - 1; i++) {
+    //如果有歌词就刷新歌词
+    if (self.findLyric) {
         
-        NSString *timeInRow = [self.lyricTimeForRows objectAtIndex:i];
-        NSArray *timeSubArray = [timeInRow componentsSeparatedByString:@":"];
-        NSInteger minutes = [[timeSubArray firstObject]integerValue];
-        NSInteger seconds = [[timeSubArray lastObject]integerValue];
-        NSInteger timeInSeconds = minutes * 60 + seconds;
-        
-        NSString *nextTimeInRow = [self.lyricTimeForRows objectAtIndex:i+1];
-        NSArray *nextTimeSubArray = [nextTimeInRow componentsSeparatedByString:@":"];
-        NSInteger nextMinutes = [[nextTimeSubArray firstObject]integerValue];
-        NSInteger nextSeconds = [[nextTimeSubArray lastObject]integerValue];
-        NSInteger nextTimeInSeconds = nextMinutes * 60 + nextSeconds;
-        
-        NSInteger currentSeconds = cur.minute * 60 + cur.second;
-        
-        if (currentSeconds >= timeInSeconds && currentSeconds < nextTimeInSeconds) {
+        for (NSInteger i = 0; i < self.lyricTimeForRows.count - 1; i++) {
             
-            self.currentLyricRowIndex = i;
+            NSString *timeInRow = [self.lyricTimeForRows objectAtIndex:i];
+            NSArray *timeSubArray = [timeInRow componentsSeparatedByString:@":"];
+            NSInteger minutes = [[timeSubArray firstObject]integerValue];
+            NSInteger seconds = [[timeSubArray lastObject]integerValue];
+            NSInteger timeInSeconds = minutes * 60 + seconds;
             
-            if ((nextTimeInSeconds - currentSeconds) <= 1) {
+            NSString *nextTimeInRow = [self.lyricTimeForRows objectAtIndex:i+1];
+            NSArray *nextTimeSubArray = [nextTimeInRow componentsSeparatedByString:@":"];
+            NSInteger nextMinutes = [[nextTimeSubArray firstObject]integerValue];
+            NSInteger nextSeconds = [[nextTimeSubArray lastObject]integerValue];
+            NSInteger nextTimeInSeconds = nextMinutes * 60 + nextSeconds;
+            
+            NSInteger currentSeconds = cur.minute * 60 + cur.second;
+            
+            if (currentSeconds >= timeInSeconds && currentSeconds < nextTimeInSeconds) {
                 
-                self.currentLyricRowIndex = i + 1;
+                self.currentLyricRowIndex = i;
+                
+//                if ((nextTimeInSeconds - currentSeconds) <= 1) {
+//                    
+//                    self.currentLyricRowIndex = i + 1;
+//                }
             }
         }
+        
+        //使被选中的行移到中间
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentLyricRowIndex inSection:0];
+        [self.lyricTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        
+        [self.lyricTableView reloadData];
     }
     
-    [self.lyricTableView reloadData];
-    
-    //使被选中的行移到中间
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentLyricRowIndex inSection:0];
-    [self.lyricTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
 }
 
 - (BOOL)parseLyric{
@@ -301,6 +433,8 @@
         lyricCellInRow.textLabel.textColor = [UIColor blueColor];
         lyricCellInRow.textLabel.font = [UIFont systemFontOfSize:16];
     }
+    
+    lyricCellInRow.textLabel.adjustsFontSizeToFitWidth = YES;
     
     return lyricCellInRow;
 }

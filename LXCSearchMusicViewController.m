@@ -51,9 +51,40 @@
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+}
+
 #pragma mark search music
 - (IBAction)searchMusic:(id)sender {
     
+    BOOL nothing = YES;
+    
+    //判断输入的歌名是否为空
+    for (NSInteger i = 0; i < self.inputSongNameTextField.text.length; i++)
+    {
+        char ch = [self.inputSongNameTextField.text characterAtIndex:i];
+        
+        if (ch != ' ')
+        {
+            nothing = NO;
+            break;
+        }
+    }
+
+    if (self.inputSongNameTextField.text.length == 0 || nothing){
+        
+        UIAlertController *deleteAlertController = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"歌名不能为空" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"我知道啦" style:UIAlertActionStyleDefault handler:nil];
+        
+        [deleteAlertController addAction:cancelAction];
+        
+        [self presentViewController:deleteAlertController animated:YES completion:nil];
+        
+        return;
+    }
+
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
     [self.musicLinks removeAllObjects];
@@ -72,7 +103,6 @@
         self.lyricLinks = searchMusicFromInternet.lyricLinks;
         
         [[NSOperationQueue mainQueue]addOperationWithBlock:^{
-            NSLog(@"更新UI...%@",[NSThread currentThread]);
             
             if (self.searchMusicTableView.hidden) {
                 
@@ -133,6 +163,7 @@
     NSArray *lyricLinkSubStrings = [lyricLink componentsSeparatedByString:@"/"];
     
     musicPlayerViewController.songName = self.inputSongNameTextField.text;
+    musicPlayerViewController.playingMusicIndex = -1;
     
     NSOperationQueue *opQueue = [[NSOperationQueue alloc]init];
     NSBlockOperation *blockOp = [NSBlockOperation blockOperationWithBlock:^{
@@ -207,7 +238,28 @@
         lyricID = [[lyricFileName componentsSeparatedByString:@"."]firstObject];
     }
     
-    NSString *musicFileName = [NSString stringWithFormat:@"%@-%@-%@.mp3", self.inputSongNameTextField.text, self.inputSingerNameTextField.text, lyricID];
+    NSString *singerName = self.inputSingerNameTextField.text;
+    
+    BOOL nothing = YES;
+    
+    //判断输入的歌名是否为空
+    for (NSInteger i = 0; i < self.inputSingerNameTextField.text.length; i++)
+    {
+        char ch = [self.inputSingerNameTextField.text characterAtIndex:i];
+        
+        if (ch != ' ')
+        {
+            nothing = NO;
+            break;
+        }
+    }
+    
+    if (self.inputSingerNameTextField.text.length == 0 || nothing){
+        
+        singerName = @"未知歌手";
+    }
+    
+    NSString *musicFileName = [NSString stringWithFormat:@"%@-%@-%@.mp3", self.inputSongNameTextField.text, singerName, lyricID];
     NSString *musicFilePath = [NSString stringWithFormat:@"%@/musicFiles/%@", sandBoxPath, musicFileName];
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
