@@ -36,6 +36,7 @@ static LXCMusicPlayer * musicPlayer = nil;
     self.audioStream.onCompletion=^()
     {
         NSLog(@"播放完成!");
+        NSLog(@"hello");
     };
     
     [self.audioStream play];
