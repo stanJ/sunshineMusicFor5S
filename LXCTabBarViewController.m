@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"stanJ到此一游");
     // Do any additional setup after loading the view.
 }
 
